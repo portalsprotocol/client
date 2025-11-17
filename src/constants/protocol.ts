@@ -1,0 +1,15 @@
+export const PROTOCOL_CONSTANTS = {
+  MIN_COLLATERAL: 5_000_000,
+  PLATFORM_FEE_BPS: 1000,
+  UPDATE_COOLDOWN: 3600,
+  PORTALS_DECIMALS: 9,
+  USDC_DECIMALS: 6,
+} as const;
+
+export const ACCOUNT_DISCRIMINATORS = {
+  REGISTRY: 'HqR9ZCzDjT6',
+  API_ENTRY: 'Qj87TFHVcLk',
+} as const;
+
+export const API_ENTRY_SIZE = 8 + 32 + (4+50) + (4+250) + (4+200) + 32 + 32 + 8 + 8 + 1 + 8 + 8;
+

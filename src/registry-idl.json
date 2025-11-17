@@ -1,0 +1,1556 @@
+  "metadata": {
+    "name": "registry",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "add_collateral",
+      "discriminator": [
+        127,
+        82,
+        121,
+        42,
+        161,
+        176,
+        249,
+        206
+      ],
+      "accounts": [
+        {
+          "name": "api_entry",
+          "writable": true
+        },
+        {
+          "name": "registry"
+        },
+        {
+          "name": "provider_token_account",
+          "writable": true
+        },
+        {
+          "name": "collateral_vault",
+          "writable": true,
+          "relations": [
+            "api_entry"
+          ]
+        },
+        {
+          "name": "provider",
+          "signer": true,
+          "relations": [
+            "api_entry"
+          ]
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "claim_provider",
+      "discriminator": [
+        115,
+        216,
+        61,
+        95,
+        179,
+        126,
+        235,
+        229
+      ],
+      "accounts": [
+        {
+          "name": "registry"
+        },
+        {
+          "name": "api_entry",
+          "writable": true
+        },
+        {
+          "name": "payment_vault",
+          "writable": true,
+          "relations": [
+            "api_entry"
+          ]
+        },
+        {
+          "name": "payment_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  97,
+                  121,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "api_entry"
+              }
+            ]
+          }
+        },
+        {
+          "name": "provider_token_account",
+          "writable": true
+        },
+        {
+          "name": "platform_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_api",
+      "discriminator": [
+        235,
+        233,
+        12,
+        116,
+        31,
+        57,
+        81,
+        90
+      ],
+      "accounts": [
+        {
+          "name": "registry",
+          "writable": true
+        },
+        {
+          "name": "api_entry",
+          "writable": true
+        },
+        {
+          "name": "collateral_vault",
+          "writable": true
+        },
+        {
+          "name": "payment_vault",
+          "writable": true
+        },
+        {
+          "name": "payment_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  97,
+                  121,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "api_entry"
+              }
+            ]
+          }
+        },
+        {
+          "name": "provider_token_account",
+          "writable": true
+        },
+        {
+          "name": "provider_usdc_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "provider"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "usdc_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "platform_usdc_account",
+          "writable": true
+        },
+        {
+          "name": "collateral_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  112,
+                  105,
+                  95,
+                  99,
+                  111,
+                  108,
+                  108,
+                  97,
+                  116,
+                  101,
+                  114,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "api_entry"
+              }
+            ]
+          }
+        },
+        {
+          "name": "usdc_mint"
+        },
+        {
+          "name": "provider",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "api_entry"
+          ]
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "registry",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "stake_mint",
+          "type": "pubkey"
+        },
+        {
+          "name": "usdc_mint",
+          "type": "pubkey"
+        },
+        {
+          "name": "treasury",
+          "type": "pubkey"
+        },
+        {
+          "name": "platform_address",
+          "type": "pubkey"
+        },
+        {
+          "name": "platform_fee_bps",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "pause_api",
+      "discriminator": [
+        178,
+        13,
+        111,
+        232,
+        105,
+        160,
+        246,
+        172
+      ],
+      "accounts": [
+        {
+          "name": "api_entry",
+          "writable": true
+        },
+        {
+          "name": "provider",
+          "signer": true,
+          "relations": [
+            "api_entry"
+          ]
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "reactivate_api",
+      "discriminator": [
+        228,
+        154,
+        55,
+        55,
+        211,
+        201,
+        215,
+        208
+      ],
+      "accounts": [
+        {
+          "name": "registry"
+        },
+        {
+          "name": "api_entry",
+          "writable": true
+        },
+        {
+          "name": "provider",
+          "signer": true,
+          "relations": [
+            "api_entry"
+          ]
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "register_api",
+      "discriminator": [
+        69,
+        118,
+        37,
+        18,
+        212,
+        13,
+        15,
+        132
+      ],
+      "accounts": [
+        {
+          "name": "registry",
+          "writable": true
+        },
+        {
+          "name": "api_entry",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "provider_token_account",
+          "writable": true
+        },
+        {
+          "name": "collateral_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "collateral_authority"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "stake_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "collateral_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  112,
+                  105,
+                  95,
+                  99,
+                  111,
+                  108,
+                  108,
+                  97,
+                  116,
+                  101,
+                  114,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "api_entry"
+              }
+            ]
+          }
+        },
+        {
+          "name": "payment_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "payment_authority"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "usdc_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "payment_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  97,
+                  121,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "api_entry"
+              }
+            ]
+          }
+        },
+        {
+          "name": "stake_mint"
+        },
+        {
+          "name": "usdc_mint"
+        },
+        {
+          "name": "provider",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "url",
+          "type": "string"
+        },
+        {
+          "name": "collateral_amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "slash_api",
+      "discriminator": [
+        110,
+        4,
+        208,
+        11,
+        99,
+        46,
+        145,
+        98
+      ],
+      "accounts": [
+        {
+          "name": "registry",
+          "writable": true
+        },
+        {
+          "name": "api_entry",
+          "writable": true
+        },
+        {
+          "name": "collateral_vault",
+          "writable": true
+        },
+        {
+          "name": "collateral_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  112,
+                  105,
+                  95,
+                  99,
+                  111,
+                  108,
+                  108,
+                  97,
+                  116,
+                  101,
+                  114,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "api_entry"
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury_token_account",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "registry"
+          ]
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "severity_percent",
+          "type": "u8"
+        },
+        {
+          "name": "reason",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "transfer_authority",
+      "discriminator": [
+        48,
+        169,
+        76,
+        72,
+        229,
+        180,
+        55,
+        161
+      ],
+      "accounts": [
+        {
+          "name": "registry",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "registry"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "new_authority",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "update_api",
+      "discriminator": [
+        241,
+        204,
+        193,
+        202,
+        178,
+        237,
+        114,
+        29
+      ],
+      "accounts": [
+        {
+          "name": "registry"
+        },
+        {
+          "name": "api_entry",
+          "writable": true
+        },
+        {
+          "name": "provider",
+          "signer": true,
+          "relations": [
+            "api_entry"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "new_url",
+          "type": {
+            "option": "string"
+          }
+        },
+        {
+          "name": "new_title",
+          "type": {
+            "option": "string"
+          }
+        },
+        {
+          "name": "new_description",
+          "type": {
+            "option": "string"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_cooldown_time",
+      "discriminator": [
+        154,
+        214,
+        216,
+        224,
+        243,
+        75,
+        169,
+        102
+      ],
+      "accounts": [
+        {
+          "name": "registry",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "registry"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "new_cooldown",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "update_min_stake_amount",
+      "discriminator": [
+        34,
+        93,
+        30,
+        224,
+        253,
+        109,
+        91,
+        151
+      ],
+      "accounts": [
+        {
+          "name": "registry",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "registry"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "new_amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "APIEntry",
+      "discriminator": [
+        141,
+        217,
+        153,
+        13,
+        237,
+        94,
+        245,
+        5
+      ]
+    },
+    {
+      "name": "Registry",
+      "discriminator": [
+        47,
+        174,
+        110,
+        246,
+        184,
+        182,
+        252,
+        218
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "APIClosed",
+      "discriminator": [
+        28,
+        206,
+        88,
+        195,
+        165,
+        205,
+        218,
+        54
+      ]
+    },
+    {
+      "name": "APIPaused",
+      "discriminator": [
+        151,
+        178,
+        62,
+        135,
+        242,
+        174,
+        100,
+        86
+      ]
+    },
+    {
+      "name": "APIReactivated",
+      "discriminator": [
+        103,
+        152,
+        171,
+        52,
+        68,
+        25,
+        126,
+        12
+      ]
+    },
+    {
+      "name": "APIRegistered",
+      "discriminator": [
+        215,
+        70,
+        219,
+        128,
+        225,
+        44,
+        203,
+        99
+      ]
+    },
+    {
+      "name": "APISlashed",
+      "discriminator": [
+        61,
+        0,
+        224,
+        11,
+        5,
+        186,
+        229,
+        19
+      ]
+    },
+    {
+      "name": "APIUpdated",
+      "discriminator": [
+        108,
+        208,
+        121,
+        96,
+        125,
+        182,
+        82,
+        150
+      ]
+    },
+    {
+      "name": "AuthorityTransferred",
+      "discriminator": [
+        245,
+        109,
+        179,
+        54,
+        135,
+        92,
+        22,
+        64
+      ]
+    },
+    {
+      "name": "CollateralAdded",
+      "discriminator": [
+        172,
+        68,
+        58,
+        249,
+        157,
+        64,
+        74,
+        141
+      ]
+    },
+    {
+      "name": "CooldownTimeUpdated",
+      "discriminator": [
+        138,
+        1,
+        176,
+        61,
+        101,
+        108,
+        129,
+        176
+      ]
+    },
+    {
+      "name": "MinStakeAmountUpdated",
+      "discriminator": [
+        191,
+        48,
+        218,
+        0,
+        136,
+        97,
+        204,
+        84
+      ]
+    },
+    {
+      "name": "PlatformClaimed",
+      "discriminator": [
+        255,
+        230,
+        175,
+        130,
+        59,
+        4,
+        230,
+        12
+      ]
+    },
+    {
+      "name": "ProviderClaimed",
+      "discriminator": [
+        132,
+        168,
+        68,
+        70,
+        42,
+        223,
+        217,
+        57
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "TitleTooLong",
+      "msg": "Title too long (max 50 characters)"
+    },
+    {
+      "code": 6001,
+      "name": "DescriptionTooLong",
+      "msg": "Description too long (max 250 characters)"
+    },
+    {
+      "code": 6002,
+      "name": "URLTooLong",
+      "msg": "URL too long (max 200 characters)"
+    },
+    {
+      "code": 6003,
+      "name": "InsufficientCollateral",
+      "msg": "Insufficient collateral to register API"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidAmount",
+      "msg": "Invalid amount"
+    },
+    {
+      "code": 6005,
+      "name": "UpdateCooldownNotMet",
+      "msg": "Update cooldown not met (must wait before next update/close)"
+    },
+    {
+      "code": 6006,
+      "name": "APINotSuspended",
+      "msg": "API is not suspended"
+    },
+    {
+      "code": 6007,
+      "name": "InvalidSeverity",
+      "msg": "Invalid severity level (must be 0%, 10% or 25%)"
+    },
+    {
+      "code": 6008,
+      "name": "APIAlreadySuspended",
+      "msg": "API is already suspended"
+    },
+    {
+      "code": 6009,
+      "name": "InvalidFee",
+      "msg": "Invalid fee (must be 0-10000 basis points)"
+    },
+    {
+      "code": 6010,
+      "name": "NothingToClaim",
+      "msg": "Nothing to claim"
+    },
+    {
+      "code": 6011,
+      "name": "SlashCooldownNotMet",
+      "msg": "Slash cooldown not met (must wait 24h between slashes)"
+    },
+    {
+      "code": 6012,
+      "name": "ReasonTooLong",
+      "msg": "Reason too long (max 100 characters)"
+    }
+  ],
+  "types": [
+    {
+      "name": "APIClosed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "api_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "provider",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "APIEntry",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "provider",
+            "type": "pubkey"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "type": "string"
+          },
+          {
+            "name": "payment_vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "collateral_vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "collateral_amount",
+            "type": "u64"
+          },
+          {
+            "name": "total_claimed",
+            "type": "u64"
+          },
+          {
+            "name": "suspended",
+            "type": "bool"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "last_updated",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "APIPaused",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "api_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "provider",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "APIReactivated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "api_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "provider",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "APIRegistered",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "api_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "provider",
+            "type": "pubkey"
+          },
+          {
+            "name": "payment_vault",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "APISlashed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "api_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "provider",
+            "type": "pubkey"
+          },
+          {
+            "name": "severity_percent",
+            "type": "u8"
+          },
+          {
+            "name": "slashed_amount",
+            "type": "u64"
+          },
+          {
+            "name": "remaining_collateral",
+            "type": "u64"
+          },
+          {
+            "name": "reason",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "APIUpdated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "api_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "provider",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AuthorityTransferred",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "old_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "new_authority",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CollateralAdded",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "api_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "provider",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "new_total",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CooldownTimeUpdated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "new_cooldown",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MinStakeAmountUpdated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "new_amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PlatformClaimed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "api_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "platform",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProviderClaimed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "api_id",
+            "type": "pubkey"
+          },
+          {
+            "name": "provider",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Registry",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_apis",
+            "type": "u64"
+          },
+          {
+            "name": "min_stake_amount",
+            "type": "u64"
+          },
+          {
+            "name": "update_cooldown",
+            "type": "i64"
+          },
+          {
+            "name": "stake_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "usdc_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "treasury",
+            "type": "pubkey"
+          },
+          {
+            "name": "platform_address",
+            "type": "pubkey"
+          },
+          {
+            "name": "platform_fee_bps",
+            "type": "u16"
+          }
+        ]
+      }
+    }
+  ]
+}
