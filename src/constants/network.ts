@@ -2,7 +2,7 @@ import { PublicKey } from '@solana/web3.js';
 
 export type NetworkCluster = 'devnet' | 'mainnet-beta';
 
-export const DEFAULT_NETWORK: NetworkCluster = 'devnet';
+export const DEFAULT_NETWORK: NetworkCluster = 'mainnet-beta';
 
 export const RPC_ENDPOINTS: Record<NetworkCluster, string> = {
   'devnet': 'https://api.devnet.solana.com',
@@ -26,7 +26,7 @@ export const PORTALS_MINT: Record<NetworkCluster, PublicKey> = {
 
 export const REGISTRY_ACCOUNT: Record<NetworkCluster, PublicKey> = {
   'devnet': new PublicKey('43CczJDbDnuCuU7NbD8VqQEcxEiQcXWN4HhqbBF68r8N'),
-  'mainnet-beta': new PublicKey('11111111111111111111111111111111'),
+  'mainnet-beta': new PublicKey('3HL31uTgncGMmN2EkjCvPnsyvA3gCaLhwQSPRWo4i8Gr'),
 };
 
 export const USDC_DECIMALS = 6;
