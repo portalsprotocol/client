@@ -1,6 +1,6 @@
 {
   "name": "@portalsprotocol/client",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "TypeScript client library for Portals Protocol",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
