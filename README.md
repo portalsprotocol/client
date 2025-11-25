@@ -4,7 +4,7 @@
 
 Portals gives AI agents access to unstoppable tools through community-built APIs. Each Portal is a service exposing multiple related tools. Agents discover Portals on-chain, pay in USDC per call, and use them instantly—no API keys, no accounts, no middlemen.
 
-**Live on devnet** • [Website](https://portalsprotocol.com) • [Docs](https://portalsprotocol.com/docs)
+**Live on Mainnet** • [Website](https://portalsprotocol.com) • [Docs](https://portalsprotocol.com/docs)
 
 ## Installation
 
@@ -20,7 +20,7 @@ import { PortalsClient } from '@portalsprotocol/client';
 // Load wallet and connect
 const client = PortalsClient.fromFile({
   walletPath: '~/.portals/wallet.json',
-  network: 'devnet'
+  network: 'mainnet-beta'
 });
 
 // Discover Portals
@@ -48,13 +48,13 @@ import { PortalsClient } from '@portalsprotocol/client';
 // Create new wallet
 const client = PortalsClient.createNew({
   walletPath: '~/.portals/wallet.json',
-  network: 'devnet'
+  network: 'mainnet-beta'
 });
 
 // Or load existing
 const client = PortalsClient.fromFile({
   walletPath: '~/.portals/wallet.json',
-  network: 'devnet'
+  network: 'mainnet-beta'
 });
 
 // Search for Portals
@@ -87,10 +87,19 @@ import {
   deserializeAPIEntryToStrings,
   formatPricing
 } from '@portalsprotocol/client/browser';
+import { useWallet }かと思います。
+
+```typescript
+import {
+  getConfig,
+  derivePaymentVaultPda,
+  deserializeAPIEntryToStrings,
+  formatPricing
+} from '@portalsprotocol/client/browser';
 import { useWallet } from '@solana/wallet-adapter-react';
 
 const { publicKey } = useWallet();
-const config = getConfig('devnet');
+const config = getConfig('mainnet-beta');
 
 // Derive PDA addresses
 const [paymentVault] = derivePaymentVaultPda(portalId, config.registryProgramId);
@@ -144,13 +153,13 @@ const priceText = formatPricing(portal.pricing);
 ### Security
 - **Pre-payment verification** - Checks registry before agent pays
 - **Safety limits** - $0.001 minimum, $10 maximum per call
-- **Collateral system** - Providers stake 5M $PORTALS per Portal
+- **Collateral system** - Providers stake 500K $PORTALS per Portal
 - **Transparent** - Full TypeScript source included in package
 
 ## Network Support
 
-- **Devnet** (default in v0.x) - Testing and development
-- **Mainnet** (coming soon) - Production after smart contract deployment
+- **Mainnet** (default) - Production
+- **Devnet** - Testing and development
 
 ## API Reference
 
@@ -183,7 +192,7 @@ const priceText = formatPricing(portal.pricing);
 ```typescript
 // Constants
 getConfig(network?: 'devnet' | 'mainnet-beta'): NetworkConfig
-DEFAULT_NETWORK: 'devnet'
+DEFAULT_NETWORK: 'mainnet-beta'
 REGISTRY_PROGRAM_ID, USDC_MINT, PORTALS_MINT
 
 // PDA Helpers

@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
 import { X402Response, X402PaymentRequired } from './types';
 import { OpenAPISchema, extractToolsFromSchema, ToolInfo } from './schema';
 
@@ -12,27 +12,14 @@ export class X402Client {
     base.search = '';
     const openapiUrl = base.toString();
     
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
-    
     try {
-      const response = await fetch(openapiUrl, { 
-        method: 'GET',
-        signal: controller.signal
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Failed to get API schema: ${response.statusText}`);
-      }
-
-      return await response.json() as OpenAPISchema;
+      const response = await axios.get(openapiUrl, { timeout: 10000 });
+      return response.data as OpenAPISchema;
     } catch (error: any) {
-      if (error.name === 'AbortError') {
+      if (error.code === 'ECONNABORTED') {
         throw new Error('Schema fetch timeout (10s limit)');
       }
-      throw error;
-    } finally {
-      clearTimeout(timeoutId);
+      throw new Error(`Failed to get API schema: ${error.message}`);
     }
   }
 
@@ -50,44 +37,30 @@ export class X402Client {
       headers['X-PAYMENT'] = proof;
     }
 
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 300000);
-    
     try {
-      const response = await fetch(url, {
-        method: 'POST',
+      const response = await axios.post(url, params, {
         headers,
-        body: JSON.stringify(params),
-        signal: controller.signal
+        timeout: 300000,
+        validateStatus: () => true,
       });
 
       const x402Headers = {
-        'x402-amount': response.headers.get('x402-amount') || undefined,
-        'x402-currency': response.headers.get('x402-currency') || undefined,
-        'x402-chain': response.headers.get('x402-chain') || undefined,
-        'x402-address': response.headers.get('x402-address') || undefined,
+        'x402-amount': response.headers['x402-amount'] || undefined,
+        'x402-currency': response.headers['x402-currency'] || undefined,
+        'x402-chain': response.headers['x402-chain'] || undefined,
+        'x402-address': response.headers['x402-address'] || undefined,
       };
-
-      let data;
-      const contentType = response.headers.get('content-type');
-      if (contentType?.includes('application/json')) {
-        data = await response.json();
-      } else {
-        data = await response.text();
-      }
 
       return {
         status: response.status,
         headers: x402Headers,
-        data,
+        data: response.data,
       };
     } catch (error: any) {
-      if (error.name === 'AbortError') {
+      if (error.code === 'ECONNABORTED') {
         throw new Error('Portal call timeout (5 min limit)');
       }
       throw error;
-    } finally {
-      clearTimeout(timeoutId);
     }
   }
 
@@ -124,4 +97,3 @@ export class X402Client {
     throw new Error('Invalid 402 response: missing payment details');
   }
 }
-
